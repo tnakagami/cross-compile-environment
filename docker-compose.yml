@@ -1,0 +1,31 @@
+version: '3.7'
+
+x-logging:
+    &json-logging
+    driver: json-file
+    options:
+        max-size: "1m"
+        max-file: "3"
+
+services:
+    armf:
+        build:
+            context: ./
+            dockerfile: Dockerfile.arm
+        image: custom-armf
+        restart: always
+        container_name: armf
+        volumes:
+            - ./armer:/home/armer
+        logging: *json-logging
+
+    arm64:
+        build:
+            context: ./
+            dockerfile: Dockerfile.arm64
+        image: custom-arm64
+        restart: always
+        container_name: arm64
+        volumes:
+            - ./armer:/home/armer
+        logging: *json-logging

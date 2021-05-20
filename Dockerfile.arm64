@@ -1,0 +1,24 @@
+FROM ubuntu:20.04
+
+RUN    apt-get update \
+    && apt-get install -y g++-aarch64-linux-gnu qemu-user-binfmt vim gosu \
+    && ln -s /usr/aarch64-linux-gnu/ /usr/local/arm-linux \
+    && mkdir -p /etc/vim
+
+COPY vimrc.dat /etc/vim/vimrc
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/start.sh
+
+ENV HOME /home/armer
+RUN chmod +x /usr/local/bin/entrypoint.sh
+RUN    groupadd --gid=9001 armer \
+    && useradd -g armer --uid=9001 -m -s /bin/bash armer \
+    && mkdir -p /etc/sudoers.d/ \
+    && echo "armer ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/armer \
+    && chmod 0440 /etc/sudoers.d/armer
+
+WORKDIR ${HOME}
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["/usr/local/bin/start.sh"]
