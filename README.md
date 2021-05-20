@@ -18,20 +18,21 @@ docker-compose up -d
 
     ```bash
     # Enter the armf container from host machine
-    docker exec -it armf bash
+    docker exec -it -u armer armf bash
     # execute command
-    arm-linux-gnueabihf-gcc -o hello_armf hello.c
+    arm-linux-gnueabihf-gcc -o armf_hello hello.c
     # run the program
-    ./hello_armf
+    ./execute.sh armf_hello
     ```
 
 * Compile the programs for arm64
 
     ```bash
     # Enter the armf container from host machine
-    docker exec -it arm64 bash
+    docker exec -it -u armer arm64 bash
     # execute command
-    aarch64-linux-gnu-gcc -o hello_arm64 hello.c
+    aarch64-linux-gnu-gcc -o arm64_hello hello.c
     # run the program
-    ./hello_arm64
+    ./execute.sh arm64_hello
+    ```
     ```

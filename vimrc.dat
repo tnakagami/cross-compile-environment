@@ -1,0 +1,128 @@
+" If you wish to change any of those settings, you should do it in this file (/etc/vim/vimrc)
+runtime! debian.vim
+
+" Source a global configuration file if available
+if filereadable("/etc/vim/vimrc.local")
+    source /etc/vim/vimrc.local
+endif
+
+" === 基本設定 ===
+" グループの初期化
+augroup myvimauto
+    autocmd!
+augroup END
+
+syntax on
+
+" 文字コードを UTF-8 に設定
+set fenc=utf-8
+
+" 入力中のコマンドをステータスに表示
+set showcmd
+
+" 保存時に行末のスペースを削除
+autocmd myvimauto BufWritePre * %s/\s\+$//e
+
+" 色の設定
+highlight StatusLine ctermbg=none ctermfg=grey
+highlight Comment ctermfg=LightGreen
+highlight Constant ctermfg=DarkRed
+highlight Identifier ctermfg=Cyan
+highlight Statement ctermfg=Brown
+highlight SpecialKey ctermbg=none ctermfg=darkgray
+highlight Directory ctermfg=grey
+
+" 入力モードに入ったら，その行を太字に，
+" 入力モードから出ると underline にするように設定
+autocmd myvimauto VimEnter,ColorScheme * highlight CursorLine cterm=underline
+autocmd myvimauto InsertEnter * highlight CursorLine cterm=bold
+autocmd myvimauto InsertLeave * highlight CursorLine cterm=underline
+
+" === 見た目系 ===
+" 行番号を表示
+set number
+
+" ルーラーの表示
+set ruler
+
+" 現在の行を強調表示
+set cursorline
+
+" スマートインデント
+set smartindent
+
+" オートインデント
+set autoindent
+
+set expandtab
+
+" スマートタブ
+set smarttab
+
+" 括弧入力時に対応する括弧を表示
+set showmatch
+
+" ステータスラインを常に表示
+set laststatus=2
+
+" コマンドラインの高さ
+set cmdheight=1
+
+" コマンドラインの補完
+set wildmode=list:longest
+
+" 折り返し時に表示業単位で移動
+nnoremap j gj
+nnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up> gk
+nnoremap $ g$
+nnoremap ^ g^
+nnoremap <Home> g^
+nnoremap <End> g$
+nnoremap gj j
+nnoremap gk k
+nnoremap g$ $
+nnoremap g^ ^
+
+" 行末スペースをハイライト
+autocmd myvimauto VimEnter,WinEnter * match Error /\s\+$/
+
+" ファイル名の表示
+set statusline=%<%t\ %m%r%h%w\ [position=%04l,%04v][%p%%]\ [length=%L]\ %{'['.(&fenc!=''?&fenc:&enc).']\ ['.&fileformat.']'}
+
+" === TAB 系 ===
+" 不可視文字を可視化
+set list listchars=tab:>^
+
+set backspace=indent,eol,start
+
+" 行頭以外の TAB の表示幅
+set tabstop=4
+
+" 行頭での TAB の表示幅
+set shiftwidth=4
+set softtabstop=4
+
+" === 検索系 ===
+" 検索文字列が小文字の場合は，大文字小文字を区別なく検索
+set ignorecase
+
+" 検索文字に大文字が含まれている場合は区別して検索
+set smartcase
+
+" 文字列入力時に，順次対象文字列にヒットさせる
+set incsearch
+
+" 検索時に最後まで行ったら最初に戻る
+set wrapscan
+
+" 検索語をハイライト
+set hlsearch
+
+" コマンドラインの補完をするときに強化されたものを使う
+set wildmenu
+
+" ESC 連打でハイライト解除
+nmap <Esc><Esc> :nohlsearch<CR><Esc>
+

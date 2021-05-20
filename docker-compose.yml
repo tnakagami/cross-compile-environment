@@ -16,7 +16,7 @@ services:
         restart: always
         container_name: armf
         volumes:
-            - ./src:/src
+            - ./armer:/home/armer
         logging: *json-logging
 
     arm64:
@@ -27,5 +27,5 @@ services:
         restart: always
         container_name: arm64
         volumes:
-            - ./src:/src
+            - ./armer:/home/armer
         logging: *json-logging
