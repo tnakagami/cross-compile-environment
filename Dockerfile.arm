@@ -1,0 +1,15 @@
+ARG LD_VERSION=2.31
+FROM ubuntu:20.04
+
+ENV DEVELOP_WORKDIR /src
+
+RUN    apt-get update \
+    && apt-get install -y g++-arm-linux-gnueabihf qemu-user-binfmt \
+    && ln -s /usr/arm-linux-gnueabihf/lib /lib/arm-linux-gnueabihf \
+    && ln -s /lib/arm-linux-gnueabihf/lib/ld-${LD_VERSION}.so /lib/ld-linux-armhf.so.3 \
+    && mkdir -p ${DEVELOP_WORKDIR}
+
+WORKDIR ${DEVELOP_WORKDIR}
+
+ENTRYPOINT ["tail"]
+CMD ["-f","/dev/null"]

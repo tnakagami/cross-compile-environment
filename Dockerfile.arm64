@@ -1,0 +1,15 @@
+ARG LD_VERSION=2.31
+FROM ubuntu:20.04
+
+ENV DEVELOP_WORKDIR /src
+
+RUN    apt-get update \
+    && apt-get install -y g++-aarch64-linux-gnu qemu-user-binfmt \
+    && ln -s /usr/aarch64-linux-gnu/lib/ /lib/aarch64-linux-gnu \
+    && ln -s /lib/aarch64-linux-gnu/lib/ld-${LD_VERSION}.so /lib/ld-linux-aarch64.so.1 \
+    && mkdir -p ${DEVELOP_WORKDIR}
+
+WORKDIR ${DEVELOP_WORKDIR}
+
+ENTRYPOINT ["tail"]
+CMD ["-f","/dev/null"]
