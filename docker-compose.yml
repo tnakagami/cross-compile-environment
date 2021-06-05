@@ -20,6 +20,7 @@ services:
             - NODE_GID=117
         volumes:
             - ./armer/execute.sh:/home/armer/execute.sh:ro
+            - ./armer/src:/home/armer/src
             - ./armer/.bashrc:/home/armer/.bashrc
         logging: *json-logging
 
@@ -35,5 +36,6 @@ services:
             - NODE_GID=117
         volumes:
             - ./armer/execute.sh:/home/armer/execute.sh:ro
+            - ./armer/src:/home/armer/src
             - ./armer/.bashrc:/home/armer/.bashrc
         logging: *json-logging
