@@ -4,6 +4,10 @@ Run the following command:
 
 ```bash
 docker-compose build
+
+or
+
+./wrapper biuld
 ```
 
 ## Create containers
@@ -11,16 +15,29 @@ Run the following command:
 
 ```bash
 docker-compose up -d
+
+or
+
+./wrapper start
 ```
 
 ## Usage
+* Check and modify `NODE_UID` and `NODE_GID`
+
+    ```bash
+    # in host directory
+    id
+    # output(example): uid=1001(docker) gid=117(docker) groups=117(docker)
+    # set to NODE_UID=1001, NODE_GID=117 in docker-compose.yml
+    ```
+
 * Compile the programs for armf
 
     ```bash
     # Enter the armf container from host machine
-    docker exec -it -u armer armf bash
+    ./wrapper.sh armf
     # execute command
-    arm-linux-gnueabihf-gcc -o armf_hello hello.c
+    xgcc -o armf_hello src/hello.c
     # run the program
     ./execute.sh armf_hello
     ```
@@ -29,10 +46,9 @@ docker-compose up -d
 
     ```bash
     # Enter the armf container from host machine
-    docker exec -it -u armer arm64 bash
+    ./wrapper.sh arm64
     # execute command
-    aarch64-linux-gnu-gcc -o arm64_hello hello.c
+    xgcc -o arm64_hello src/hello.c
     # run the program
     ./execute.sh arm64_hello
-    ```
     ```
