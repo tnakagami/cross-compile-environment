@@ -22,6 +22,15 @@ or
 ```
 
 ## Usage
+* Check and modify `NODE_UID` and `NODE_GID`
+
+    ```bash
+    # in host directory
+    id
+    # output(example): uid=1001(docker) gid=117(docker) groups=117(docker)
+    # set to NODE_UID=1001, NODE_GID=117 in docker-compose.yml
+    ```
+
 * Create sample source code to `hello.c`
 
     ```c
