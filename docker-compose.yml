@@ -11,7 +11,7 @@ services:
     armf:
         build:
             context: ./
-            dockerfile: Dockerfile.arm
+            dockerfile: Dockerfile.armf
         image: custom-armf
         restart: always
         container_name: armf

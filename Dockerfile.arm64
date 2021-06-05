@@ -3,6 +3,8 @@ FROM ubuntu:20.04
 RUN    apt-get update \
     && apt-get install -y g++-aarch64-linux-gnu qemu-user-binfmt vim gosu \
     && ln -s /usr/aarch64-linux-gnu/ /usr/local/arm-linux \
+    && ln -s /usr/bin/aarch64-linux-gnu-gcc /usr/bin/xgcc \
+    && ln -s /usr/bin/aarch64-linux-gnu-g++ /usr/bin/xg++ \
     && mkdir -p /etc/vim
 
 COPY vimrc.dat /etc/vim/vimrc
