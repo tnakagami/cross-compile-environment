@@ -15,8 +15,12 @@ services:
         image: custom-armf
         restart: always
         container_name: armf
+        environment:
+            - NODE_UID=1001
+            - NODE_GID=117
         volumes:
-            - ./armer:/home/armer
+            - ./armer/execute.sh:/home/armer/execute.sh:ro
+            - ./armer/.bashrc:/home/armer/.bashrc
         logging: *json-logging
 
     arm64:
@@ -26,6 +30,10 @@ services:
         image: custom-arm64
         restart: always
         container_name: arm64
+        environment:
+            - NODE_UID=1001
+            - NODE_GID=117
         volumes:
-            - ./armer:/home/armer
+            - ./armer/execute.sh:/home/armer/execute.sh:ro
+            - ./armer/.bashrc:/home/armer/.bashrc
         logging: *json-logging
