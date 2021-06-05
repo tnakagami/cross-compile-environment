@@ -31,26 +31,13 @@ or
     # set to NODE_UID=1001, NODE_GID=117 in docker-compose.yml
     ```
 
-* Create sample source code to `hello.c`
-
-    ```c
-    #include <stdio.h>
-
-    int main(int argc, char **argv) {
-        (void)argv;
-        printf("Hello World!\n");
-
-        return 0;
-    }
-    ```
-
 * Compile the programs for armf
 
     ```bash
     # Enter the armf container from host machine
     ./wrapper.sh armf
     # execute command
-    xgcc -o armf_hello hello.c
+    xgcc -o armf_hello src/hello.c
     # run the program
     ./execute.sh armf_hello
     ```
@@ -61,7 +48,7 @@ or
     # Enter the armf container from host machine
     ./wrapper.sh arm64
     # execute command
-    xgcc -o arm64_hello hello.c
+    xgcc -o arm64_hello src/hello.c
     # run the program
     ./execute.sh arm64_hello
     ```
