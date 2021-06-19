@@ -41,14 +41,3 @@ or
     # run the program
     ./execute.sh armf_hello
     ```
-
-* Compile the programs for arm64
-
-    ```bash
-    # Enter the armf container from host machine
-    ./wrapper.sh arm64
-    # execute command
-    xgcc -o arm64_hello src/hello.c
-    # run the program
-    ./execute.sh arm64_hello
-    ```

@@ -40,12 +40,6 @@ while [ -n "$1" ]; do
             shift
             ;;
 
-        arm64 )
-            docker-compose up -d
-            docker exec -it -u armer arm64 bash
-            shift
-            ;;
-
         --help | -h )
             Usage
             shift

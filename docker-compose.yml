@@ -23,19 +23,3 @@ services:
             - ./armer/src:/home/armer/src
             - ./armer/.bashrc:/home/armer/.bashrc
         logging: *json-logging
-
-    arm64:
-        build:
-            context: ./
-            dockerfile: Dockerfile.arm64
-        image: custom-arm64
-        restart: always
-        container_name: arm64
-        environment:
-            - NODE_UID=1001
-            - NODE_GID=117
-        volumes:
-            - ./armer/execute.sh:/home/armer/execute.sh:ro
-            - ./armer/src:/home/armer/src
-            - ./armer/.bashrc:/home/armer/.bashrc
-        logging: *json-logging
