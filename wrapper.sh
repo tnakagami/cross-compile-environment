@@ -5,6 +5,13 @@ function Usage() {
     exit 0
 }
 
+function create_envfile() {
+    {
+        echo NODE_UID=$(id -u ${USER})
+        echo NODE_GID=$(id -g ${USER})
+    } > envfile
+}
+
 while [ -n "$1" ]; do
     case "$1" in
         ps )
@@ -18,6 +25,7 @@ while [ -n "$1" ]; do
             ;;
 
         start )
+            create_envfile
             docker-compose up -d
             shift
             ;;
@@ -35,6 +43,7 @@ while [ -n "$1" ]; do
             ;;
 
         armf )
+            create_envfile
             docker-compose up -d
             docker exec -it -u armer armf bash
             shift
